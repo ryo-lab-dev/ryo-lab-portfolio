@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>免責事項 — CloudKata</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07080f;
+      --primary: #38bdf8;
+      --primary-light: #7dd3fc;
+      --glow: rgba(56,189,248,0.2);
+      --glass-bg: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: #e2e8f0;
+      font-family: 'Noto Sans JP', sans-serif;
+      min-height: 100vh; line-height: 1.8;
+    }
+    h1, h2, .font-syne { font-family: 'Syne', sans-serif; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,8,15,0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+      height: 60px; display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      box-shadow: 0 0 8px var(--glow);
+    }
+    .nav-logo-text {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-links { display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+    .nav-links a {
+      color: #94a3b8; text-decoration: none; font-size: 0.82rem;
+      padding: 0.35rem 0.65rem; border-radius: 6px;
+      transition: color 0.2s, background 0.2s; white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary-light); background: var(--glass-bg); }
+    .nav-back a { color: #64748b; text-decoration: none; font-size: 0.82rem; white-space: nowrap; transition: color 0.2s; }
+    .nav-back a:hover { color: #94a3b8; }
+
+    .doc-container { max-width: 780px; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+    .doc-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--glass-border); }
+    .doc-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--primary);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .doc-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 0.75rem;
+    }
+    .doc-updated { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #475569; }
+
+    .doc-section { margin-bottom: 2.5rem; }
+    .doc-section h2 {
+      font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: #f1f5f9;
+      margin-bottom: 1rem; padding: 0.6rem 1rem;
+      background: rgba(56,189,248,0.07); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0;
+    }
+    .doc-section p { color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.75rem; }
+    .doc-section ul { list-style: none; padding: 0; margin: 0.5rem 0; }
+    .doc-section ul li {
+      color: #94a3b8; font-size: 0.95rem;
+      padding: 0.4rem 0 0.4rem 1.25rem; position: relative;
+    }
+    .doc-section ul li::before {
+      content: '·'; position: absolute; left: 0.3rem;
+      color: var(--primary); font-size: 1.2rem; line-height: 1.4;
+    }
+    .divider { height: 1px; background: var(--glass-border); margin: 2rem 0; }
+
+    /* Warning note */
+    .notice {
+      background: rgba(56,189,248,0.06);
+      border: 1px solid rgba(56,189,248,0.15);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      color: #7dd3fc;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    footer { border-top: 1px solid var(--glass-border); padding: 2rem 1.5rem; text-align: center; color: #475569; font-size: 0.82rem; }
+    footer p + p { margin-top: 0.4rem; color: #334155; font-size: 0.78rem; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) { .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="./index.html" class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      <span class="nav-logo-text">CloudKata</span>
+    </a>
+    <div class="nav-links">
+      <a href="./index.html">Home</a>
+      <a href="./privacy-policy.html">Privacy Policy</a>
+      <a href="./disclaimer.html" class="active">免責事項</a>
+      <a href="./terms.html">利用規約</a>
+    </div>
+    <div class="nav-back">
+      <a href="../index.html">← Portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<div class="doc-container">
+  <div class="doc-header reveal">
+    <p class="doc-tag">Legal</p>
+    <h1 class="doc-title">免責事項</h1>
+    <p class="doc-updated">最終更新日: 2026年3月2日</p>
+  </div>
+
+  <div class="notice reveal">
+    本アプリ「CloudKata」は個人開発者による非公式の学習支援ツールです。Google LLC およびその関連会社とは一切関係ありません。
+  </div>
+
+  <div class="doc-section reveal">
+    <h2>第1条 公式サービスとの関係性</h2>
+    <p>本アプリは個人開発者による非公式の学習支援ツールであり、Google LLC およびその関連会社とは一切関係ありません。</p>
+    <p>本アプリの内容は、Google Cloud 認定試験（Associate Cloud Engineer 等）の公式な見解や出題内容を反映したものではありません。</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="doc-section reveal">
+    <h2>第2条 コンテンツの独自性と正確性</h2>
+    <p>練習問題および解説は、公式 Google Cloud ドキュメントおよび試験ガイドに基づき独自に作成しています。実際の試験問題の再現（ブレインダンプ）ではありません。</p>
+    <p>情報の正確性・最新性には最大限の注意を払っていますが、これらを永久に保証するものではありません。</p>
+    <div class="notice" style="margin-top:0.75rem;">
+      最新の情報については、必ず公式 Google Cloud ドキュメント（cloud.google.com）を併用してください。
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="doc-section reveal">
+    <h2>第3条 合格の非保証</h2>
+    <p>本アプリの利用は、Google Cloud 認定試験（または他のいかなる試験）への合格を保証するものではありません。</p>
+    <p>試験結果に関連してユーザーに生じた損害・不利益について、開発者は一切の責任を負いません。</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="doc-section reveal">
+    <h2>第4条 知的財産権</h2>
+    <ul>
+      <li>「Google」「Google Cloud」「GCP」「Associate Cloud Engineer」および各製品名は Google LLC の商標または登録商標です。</li>
+      <li>アプリ内のロゴ・デザイン・独自作成の問題文・解説等の著作権は開発者に帰属します。</li>
+      <li>無断転載・複製・配布・商業利用は固く禁止します。</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="doc-section reveal">
+    <h2>第5条 サービスの変更・停止</h2>
+    <p>開発者は予告なく、本アプリの内容の変更・提供の一時停止・終了を行うことがあります。これに伴いユーザーに生じた損害・不利益について、開発者は責任を負いません。</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Ryo-Lab. CloudKata 開発チーム</p>
+  <p>Google Cloud, GCP は Google LLC の商標です。本アプリは Google LLC の公式認定品ではありません。</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

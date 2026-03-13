@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Update History — ScoreVault</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07080f;
+      --primary: #10b981;
+      --primary-light: #34d399;
+      --glow: rgba(16,185,129,0.2);
+      --glass-bg: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: #e2e8f0;
+      font-family: 'Noto Sans JP', sans-serif;
+      min-height: 100vh;
+    }
+    h1, h2, .font-syne { font-family: 'Syne', sans-serif; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,8,15,0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+      height: 60px; display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      box-shadow: 0 0 8px var(--glow);
+    }
+    .nav-logo-text {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-links { display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; justify-content: center; }
+    .nav-links a {
+      color: #94a3b8; text-decoration: none; font-size: 0.82rem;
+      padding: 0.35rem 0.65rem; border-radius: 6px;
+      transition: color 0.2s, background 0.2s; white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary-light); background: var(--glass-bg); }
+    .nav-back a { color: #64748b; text-decoration: none; font-size: 0.82rem; white-space: nowrap; transition: color 0.2s; }
+    .nav-back a:hover { color: #94a3b8; }
+
+    .page-container { max-width: 820px; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+    .page-header { margin-bottom: 3.5rem; text-align: center; }
+    .page-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+      color: var(--primary); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .page-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    .page-sub { color: #64748b; font-size: 0.9rem; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.4rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 2px;
+      background: linear-gradient(180deg, var(--primary), rgba(16,185,129,0.1));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.75rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .timeline-item:hover {
+      border-color: rgba(16,185,129,0.25);
+      box-shadow: 0 4px 20px rgba(16,185,129,0.07);
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.65rem;
+      top: 1.4rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 8px var(--glow);
+    }
+    .timeline-item.latest::before {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      box-shadow: 0 0 12px rgba(16,185,129,0.6);
+    }
+    .version-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--primary-light);
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 6px;
+      padding: 0.2rem 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+    .version-badge.latest {
+      background: rgba(16,185,129,0.15);
+      border-color: rgba(16,185,129,0.4);
+    }
+    .timeline-text {
+      color: #94a3b8;
+      font-size: 0.93rem;
+      line-height: 1.7;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: linear-gradient(135deg, var(--primary), #059669);
+      color: #fff; font-weight: 600;
+      padding: 0.75rem 1.75rem; border-radius: 10px;
+      text-decoration: none; font-size: 0.95rem;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(16,185,129,0.3);
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(16,185,129,0.4); }
+    .glass { background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(20px); border-radius: 16px; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    footer { border-top: 1px solid var(--glass-border); padding: 2rem 1.5rem; text-align: center; color: #475569; font-size: 0.85rem; }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+      color: var(--primary); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+
+    @media (max-width: 768px) { .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="./index.html" class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      <span class="nav-logo-text">ScoreVault</span>
+    </a>
+    <div class="nav-links">
+      <a href="./index.html">Home</a>
+      <a href="./privacy-policy.html">Privacy Policy</a>
+      <a href="./privacy-policy-en.html">Privacy Policy (EN)</a>
+      <a href="./faq.html">FAQ</a>
+      <a href="./update-history.html" class="active">Update History</a>
+    </div>
+    <div class="nav-back">
+      <a href="../index.html">← Portfolio</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-container">
+  <div class="page-header reveal">
+    <p class="page-tag">Changelog</p>
+    <h1 class="page-title">Update History</h1>
+    <p class="page-sub">最新バージョンから順に表示しています</p>
+  </div>
+
+  <div class="timeline reveal">
+    <div class="timeline-item latest">
+      <span class="version-badge latest">v1.1.0 — Latest</span>
+      <p class="timeline-text">多言語対応（日本語・英語）を実装。ユーザーの言語設定に合わせた検索サジェストの最適化を行いました。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="version-badge">v1.0.25</span>
+      <p class="timeline-text">プレイ時間の入力上限を 999,999 時間に設定。バリデーションエラー発生時（分が60超など）に問題箇所への自動スクロールを追加しました。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="version-badge">v1.0.24</span>
+      <p class="timeline-text">統計画面のハイライトセクションのスワイプ方向を直感的な操作に修正しました。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="version-badge">v1.0.23</span>
+      <p class="timeline-text">統計ハイライトで年別フィルタリングを有効化。複数年にまたがるゲームプレイデータの遡及確認が可能になりました。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="version-badge">v1.0.22</span>
+      <p class="timeline-text">アクティビティセクションにグラフ切替（日次・月次）を追加。算出ロジックを「ゲームをプレイした日」を基準とする方式に調整しました。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="version-badge">v1.0.21</span>
+      <p class="timeline-text">ゲーム登録時の入力エラーへの自動スクロールを追加し、必須フィールドのインジケーターを追加しました。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="version-badge">v1.0.20</span>
+      <p class="timeline-text">外部リンクの処理を改善し、アプリ情報セクションにOSSライセンス情報を追加しました。</p>
+    </div>
+
+    <div class="timeline-item">
+      <span class="version-badge">初期バージョン</span>
+      <p class="timeline-text">オンボーディングガイド・コア機能（ゲームログ記録・検索・統計・Steamインポート）を実装しリリース。</p>
+    </div>
+  </div>
+
+  <!-- Feedback CTA -->
+  <div class="reveal glass" style="padding:3rem 2rem;text-align:center;margin-top:4rem;">
+    <p class="section-label" style="text-align:center;">Feedback</p>
+    <h2 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:0.75rem;">
+      次の機能を一緒に作りませんか？
+    </h2>
+    <p style="color:#94a3b8;font-size:0.93rem;margin-bottom:1.75rem;line-height:1.7;">
+      機能要望・バグ報告はGoogleフォームから受け付けています。
+    </p>
+    <a href="https://forms.gle/1pUEYtgmeQyhEQUD6" target="_blank" rel="noopener" class="btn-primary">
+      フィードバックフォームへ →
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Ryo-Lab. ScoreVault Project</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
