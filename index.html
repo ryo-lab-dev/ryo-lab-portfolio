@@ -228,19 +228,38 @@
         /* ── Products ── */
         #products { padding: 6rem 0; }
 
+        /* Group sections */
+        .group-section { margin-bottom: 2.5rem; }
+        .group-section:last-child { margin-bottom: 0; }
+        .group-header {
+            display: flex; align-items: center; gap: 0.875rem;
+            margin-bottom: 1.125rem;
+        }
+        .group-label {
+            font-family: var(--font-m); font-size: 0.5625rem;
+            color: var(--text-3); letter-spacing: 0.14em; text-transform: uppercase;
+            padding: 0.25rem 0.6875rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border); border-radius: 100px;
+            white-space: nowrap;
+        }
+        .group-divider { flex: 1; height: 1px; background: var(--border); }
+
         .bento {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 0.875rem;
         }
-        /* Named grid areas */
-        .c-sv    { grid-column: 1 / 5; grid-row: 1 / 3; }
-        .c-ck    { grid-column: 5 / 7; grid-row: 1 / 2; }
-        .c-mg    { grid-column: 5 / 7; grid-row: 2 / 3; }
-        .c-hg    { grid-column: 1 / 3; grid-row: 3 / 4; }
-        .c-nd    { grid-column: 3 / 5; grid-row: 3 / 4; }
-        .c-de    { grid-column: 5 / 6; grid-row: 3 / 4; }
-        .c-af    { grid-column: 6 / 7; grid-row: 3 / 4; }
+        /* Published group */
+        .bento-pub .c-sv { grid-column: 1 / 5; grid-row: 1 / 3; }
+        .bento-pub .c-ck { grid-column: 5 / 7; grid-row: 1 / 2; }
+        .bento-pub .c-af { grid-column: 5 / 7; grid-row: 2 / 3; }
+        /* Dev group */
+        .bento-dev .c-mg { grid-column: 1 / 4; }
+        /* Private group */
+        .bento-prv .c-hg { grid-column: 1 / 3; }
+        .bento-prv .c-nd { grid-column: 3 / 5; }
+        .bento-prv .c-de { grid-column: 5 / 7; }
 
         /* ── Card ── */
         .card {
@@ -364,6 +383,19 @@
         }
         .card:hover .stag { color: var(--text-2); background: rgba(255,255,255,0.045); }
 
+        /* Chrome Web Store button */
+        .store-btn-chrome {
+            color: #fbbf24;
+            background: rgba(251,191,36,0.07);
+            border-color: rgba(251,191,36,0.25);
+        }
+        .store-btn-chrome:hover {
+            background: rgba(251,191,36,0.14);
+            border-color: rgba(251,191,36,0.5);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(251,191,36,0.15);
+        }
+
         /* Private badge */
         .b-private {
             color: var(--text-3);
@@ -433,12 +465,16 @@
         /* ── Responsive bento ── */
         @media (max-width: 860px) {
             .bento { grid-template-columns: repeat(2, 1fr); }
-            .c-sv,.c-ck,.c-mg,.c-hg,.c-nd,.c-de,.c-af { grid-column: auto; grid-row: auto; }
-            .c-sv { grid-column: 1 / 3; }
+            .bento-pub .c-sv,.bento-pub .c-ck,.bento-pub .c-af,
+            .bento-dev .c-mg,
+            .bento-prv .c-hg,.bento-prv .c-nd,.bento-prv .c-de { grid-column: auto; grid-row: auto; }
+            .bento-pub .c-sv { grid-column: 1 / 3; }
         }
         @media (max-width: 520px) {
             .bento { grid-template-columns: 1fr; }
-            .c-sv,.c-ck,.c-mg,.c-hg,.c-nd,.c-de,.c-af { grid-column: 1 / 2; grid-row: auto; }
+            .bento-pub .c-sv,.bento-pub .c-ck,.bento-pub .c-af,
+            .bento-dev .c-mg,
+            .bento-prv .c-hg,.bento-prv .c-nd,.bento-prv .c-de { grid-column: 1 / 2; grid-row: auto; }
             nav { padding: 1rem 1.25rem; }
             .nav-links { display: none; }
         }
@@ -552,191 +588,225 @@
             <h2 class="sec-title">7 Crafted Apps</h2>
         </div>
 
-        <div class="bento">
+        <!-- ── Group 1: 公開中／公開準備中 ── -->
+        <div class="group-section">
+            <div class="group-header rev">
+                <span class="group-label">公開中 / 公開準備中</span>
+                <div class="group-divider"></div>
+            </div>
+            <div class="bento bento-pub">
 
-            <!-- 01 ScoreVault — Featured -->
-            <div class="card featured c-sv rev">
-                <div class="ci ci-lg">
-                    <div class="ct">
-                        <div class="badges">
-                            <span class="badge b-live">Released on Google Play</span>
-                            <span class="badge b-tag">Flutter · Android · Windows</span>
+                <!-- 01 ScoreVault — Featured -->
+                <div class="card featured c-sv rev">
+                    <div class="ci ci-lg">
+                        <div class="ct">
+                            <div class="badges">
+                                <span class="badge b-live">Released on Google Play</span>
+                                <span class="badge b-tag">Flutter · Android · Windows</span>
+                            </div>
+                            <span class="card-num">01</span>
                         </div>
-                        <span class="card-num">01</span>
+                        <h3 class="ctitle ctitle-xl">ScoreVault</h3>
+                        <p class="cdesc">
+                            自分だけの正直なゲーム感想を蓄積できる「非公開型」ゲームプレイ記録アプリ。Steam/IGDB連携、統計ダッシュボード、端末間同期を搭載。
+                        </p>
+                        <ul class="flist">
+                            <li>Steam/IGDB連携でゲーム情報を自動取得</li>
+                            <li>レーダーチャートで多角的スコア分析</li>
+                            <li>Firebase同期 + Isarオフラインファースト</li>
+                        </ul>
+                        <div class="store-btns">
+                            <a href="https://play.google.com/store/apps/details?id=com.scorevault.score_vault" target="_blank" rel="noopener" class="store-btn store-btn-gplay">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L15.34 12 3.18 1.54v22.22zm15.4-13.04l-2.72-1.56L13.6 12l2.26 2.84 2.72-1.56c.78-.44.78-1.52 0-1.96zM4.38.28l10.8 6.2L12.52 9.3 4.38.28zm0 23.44l8.14-9.02 2.66 2.82L4.38 23.72z"/></svg>
+                                Google Play
+                            </a>
+                            <span class="store-btn store-btn-apple">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                                App Store
+                                <span class="tip">鋭意開発中</span>
+                            </span>
+                            <a href="./scorevault/index.html" class="store-btn" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3);color:#34d399;">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                                詳細ページ
+                            </a>
+                        </div>
+                        <div class="stags">
+                            <span class="stag">Flutter</span>
+                            <span class="stag">Firebase</span>
+                            <span class="stag">Isar</span>
+                            <span class="stag">AdMob</span>
+                            <span class="stag">Riverpod</span>
+                            <span class="stag">go_router</span>
+                            <span class="stag">Clean Architecture</span>
+                        </div>
                     </div>
-                    <h3 class="ctitle ctitle-xl">ScoreVault</h3>
-                    <p class="cdesc">
-                        自分だけの正直なゲーム感想を蓄積できる「非公開型」ゲームプレイ記録アプリ。Steam/IGDB連携、統計ダッシュボード、端末間同期を搭載。
-                    </p>
-                    <ul class="flist">
-                        <li>Steam/IGDB連携でゲーム情報を自動取得</li>
-                        <li>レーダーチャートで多角的スコア分析</li>
-                        <li>Firebase同期 + Isarオフラインファースト</li>
-                    </ul>
-                    <div class="store-btns">
-                        <a href="https://play.google.com/store/apps/details?id=com.scorevault.score_vault" target="_blank" rel="noopener" class="store-btn store-btn-gplay">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L15.34 12 3.18 1.54v22.22zm15.4-13.04l-2.72-1.56L13.6 12l2.26 2.84 2.72-1.56c.78-.44.78-1.52 0-1.96zM4.38.28l10.8 6.2L12.52 9.3 4.38.28zm0 23.44l8.14-9.02 2.66 2.82L4.38 23.72z"/></svg>
-                            Google Play
-                        </a>
-                        <span class="store-btn store-btn-apple">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                            App Store
-                            <span class="tip">鋭意開発中</span>
-                        </span>
-                        <a href="./scorevault/index.html" class="store-btn" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3);color:#34d399;">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                            詳細ページ
-                        </a>
-                    </div>
-                    <div class="stags">
-                        <span class="stag">Flutter</span>
-                        <span class="stag">Firebase</span>
-                        <span class="stag">Isar</span>
-                        <span class="stag">AdMob</span>
-                        <span class="stag">Riverpod</span>
-                        <span class="stag">go_router</span>
-                        <span class="stag">Clean Architecture</span>
+                    <svg class="deco-radar" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="80,10 150,55 150,105 80,150 10,105 10,55" stroke="white" stroke-width="1.5" fill="none"/>
+                        <polygon points="80,30 130,57.5 130,102.5 80,130 30,102.5 30,57.5" stroke="white" stroke-width="1" fill="none"/>
+                        <polygon points="80,50 110,65 110,95 80,110 50,95 50,65" stroke="white" stroke-width="0.75" fill="none"/>
+                        <line x1="80" y1="10" x2="80" y2="150" stroke="white" stroke-width="0.5"/>
+                        <line x1="10" y1="55" x2="150" y2="105" stroke="white" stroke-width="0.5"/>
+                        <line x1="10" y1="105" x2="150" y2="55" stroke="white" stroke-width="0.5"/>
+                    </svg>
+                </div>
+
+                <!-- 02 CloudKata -->
+                <div class="card c-ck rev d1">
+                    <div class="ci">
+                        <div class="ct">
+                            <div class="badges">
+                                <span class="badge b-dev">In Development</span>
+                            </div>
+                            <span class="card-num">02</span>
+                        </div>
+                        <h3 class="ctitle ctitle-md">CloudKata</h3>
+                        <p class="cdesc cdesc-sm">GCP ACE資格学習アプリ。苦手分野を分析し、ゲーミフィケーションで継続学習をサポート。</p>
+                        <div class="store-btns">
+                            <a href="https://play.google.com/store/apps/details?id=com.originalapp.cloud_kata" target="_blank" rel="noopener" class="store-btn store-btn-gplay">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L15.34 12 3.18 1.54v22.22zm15.4-13.04l-2.72-1.56L13.6 12l2.26 2.84 2.72-1.56c.78-.44.78-1.52 0-1.96zM4.38.28l10.8 6.2L12.52 9.3 4.38.28zm0 23.44l8.14-9.02 2.66 2.82L4.38 23.72z"/></svg>
+                                Google Play
+                            </a>
+                            <span class="store-btn store-btn-apple">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                                App Store
+                                <span class="tip">鋭意開発中</span>
+                            </span>
+                            <a href="./cloudkata/index.html" class="store-btn" style="background:rgba(56,189,248,0.12);border-color:rgba(56,189,248,0.3);color:#7dd3fc;">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                                詳細ページ
+                            </a>
+                        </div>
+                        <div class="stags">
+                            <span class="stag">Flutter</span>
+                            <span class="stag">Firestore</span>
+                            <span class="stag">Isar</span>
+                        </div>
                     </div>
                 </div>
-                <!-- Radar decoration -->
-                <svg class="deco-radar" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="80,10 150,55 150,105 80,150 10,105 10,55" stroke="white" stroke-width="1.5" fill="none"/>
-                    <polygon points="80,30 130,57.5 130,102.5 80,130 30,102.5 30,57.5" stroke="white" stroke-width="1" fill="none"/>
-                    <polygon points="80,50 110,65 110,95 80,110 50,95 50,65" stroke="white" stroke-width="0.75" fill="none"/>
-                    <line x1="80" y1="10" x2="80" y2="150" stroke="white" stroke-width="0.5"/>
-                    <line x1="10" y1="55" x2="150" y2="105" stroke="white" stroke-width="0.5"/>
-                    <line x1="10" y1="105" x2="150" y2="55" stroke="white" stroke-width="0.5"/>
-                </svg>
-            </div>
 
-            <!-- 02 CloudKata -->
-            <div class="card c-ck rev d1">
-                <div class="ci">
-                    <div class="ct">
-                        <div class="badges">
-                            <span class="badge b-dev">In Development</span>
+                <!-- 03 AutoFill Customize -->
+                <div class="card c-af rev d2">
+                    <div class="ci">
+                        <div class="ct">
+                            <div class="badges">
+                                <span class="badge b-live">Released on Chrome Web Store</span>
+                            </div>
+                            <span class="card-num">03</span>
                         </div>
-                        <span class="card-num">02</span>
-                    </div>
-                    <h3 class="ctitle ctitle-md">CloudKata</h3>
-                    <p class="cdesc cdesc-sm">GCP ACE資格学習アプリ。苦手分野を分析し、ゲーミフィケーションで継続学習をサポート。</p>
-                    <div class="store-btns">
-                        <a href="https://play.google.com/store/apps/details?id=com.originalapp.cloud_kata" target="_blank" rel="noopener" class="store-btn store-btn-gplay">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2L15.34 12 3.18 1.54v22.22zm15.4-13.04l-2.72-1.56L13.6 12l2.26 2.84 2.72-1.56c.78-.44.78-1.52 0-1.96zM4.38.28l10.8 6.2L12.52 9.3 4.38.28zm0 23.44l8.14-9.02 2.66 2.82L4.38 23.72z"/></svg>
-                            Google Play
-                        </a>
-                        <span class="store-btn store-btn-apple">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                            App Store
-                            <span class="tip">鋭意開発中</span>
-                        </span>
-                        <a href="./cloudkata/index.html" class="store-btn" style="background:rgba(56,189,248,0.12);border-color:rgba(56,189,248,0.3);color:#7dd3fc;">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                            詳細ページ
-                        </a>
-                    </div>
-                    <div class="stags">
-                        <span class="stag">Flutter</span>
-                        <span class="stag">Firestore</span>
-                        <span class="stag">Isar</span>
+                        <h3 class="ctitle ctitle-md">AutoFill<br>Customize</h3>
+                        <p class="cdesc cdesc-sm">URLパターンに基づいてフォーム入力を自動化するChrome拡張機能。</p>
+                        <div class="store-btns">
+                            <a href="https://chromewebstore.google.com/detail/autofillcustomize/afciocenjmchpdpifjbkfabnklflglno" target="_blank" rel="noopener" class="store-btn store-btn-chrome">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2.4 14.5l-1.1-1.9L6 12l2.5-2.6 1.1-1.9H12c0 0 0 0 0 0v9H9.6zM12 13.5c-.83 0-1.5-.67-1.5-1.5S11.17 10.5 12 10.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm2.4 3l-1-1.7V8.5H14l2.5 2.6 1.1 1.9-2.5 2.6-1 1.7-.7.2z"/></svg>
+                                Chrome Web Store
+                            </a>
+                        </div>
+                        <div class="stags">
+                            <span class="stag">JavaScript</span>
+                            <span class="stag">MV3</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 03 Megully -->
-            <div class="card c-mg rev d2">
-                <div class="ci">
-                    <div class="ct">
-                        <div class="badges">
-                            <span class="badge b-dev">In Development</span>
+            </div>
+        </div>
+
+        <!-- ── Group 2: 開発中 ── -->
+        <div class="group-section">
+            <div class="group-header rev">
+                <span class="group-label">開発中</span>
+                <div class="group-divider"></div>
+            </div>
+            <div class="bento bento-dev">
+
+                <!-- 04 Megully -->
+                <div class="card c-mg rev">
+                    <div class="ci">
+                        <div class="ct">
+                            <div class="badges">
+                                <span class="badge b-dev">In Development</span>
+                            </div>
+                            <span class="card-num">04</span>
                         </div>
-                        <span class="card-num">03</span>
-                    </div>
-                    <h3 class="ctitle ctitle-md">Megully</h3>
-                    <p class="cdesc cdesc-sm">ロケーション連携旅行プランナー。地図と連動したスマートな旅行計画を実現。</p>
-                    <div class="stags">
-                        <span class="stag">Flutter</span>
-                        <span class="stag">Firebase</span>
+                        <h3 class="ctitle ctitle-md">Megully</h3>
+                        <p class="cdesc cdesc-sm">ロケーション連携旅行プランナー。地図と連動したスマートな旅行計画を実現。</p>
+                        <div class="stags">
+                            <span class="stag">Flutter</span>
+                            <span class="stag">Firebase</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 04 はぐ育 -->
-            <div class="card c-hg rev">
-                <div class="ci">
-                    <div class="ct">
-                        <div class="badges">
-                            <span class="badge b-tag">Flutter</span>
-                            <span class="badge b-private"><svg width="7" height="7" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>Personal Use</span>
+            </div>
+        </div>
+
+        <!-- ── Group 3: 個人用 非公開 ── -->
+        <div class="group-section">
+            <div class="group-header rev">
+                <span class="group-label">個人用 非公開</span>
+                <div class="group-divider"></div>
+            </div>
+            <div class="bento bento-prv">
+
+                <!-- 05 はぐ育 -->
+                <div class="card c-hg rev">
+                    <div class="ci">
+                        <div class="ct">
+                            <div class="badges">
+                                <span class="badge b-tag">Flutter</span>
+                                <span class="badge b-private"><svg width="7" height="7" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>Personal Use</span>
+                            </div>
+                            <span class="card-num">05</span>
                         </div>
-                        <span class="card-num">04</span>
-                    </div>
-                    <h3 class="ctitle ctitle-sm">はぐ育</h3>
-                    <p class="cdesc cdesc-sm">AIと育児相談 & Notion連携で夫婦間の情報共有を統合した育児コンシェルジュ。</p>
-                    <div class="stags">
-                        <span class="stag">Gemini AI</span>
-                        <span class="stag">Notion API</span>
-                        <span class="stag">Riverpod</span>
+                        <h3 class="ctitle ctitle-sm">はぐ育</h3>
+                        <p class="cdesc cdesc-sm">AIと育児相談 & Notion連携で夫婦間の情報共有を統合した育児コンシェルジュ。</p>
+                        <div class="stags">
+                            <span class="stag">Gemini AI</span>
+                            <span class="stag">Notion API</span>
+                            <span class="stag">Riverpod</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 05 NexusDiary -->
-            <div class="card c-nd rev d1">
-                <div class="ci">
-                    <div class="ct">
-                        <div class="badges">
-                            <span class="badge b-tag">Flutter</span>
-                            <span class="badge b-private"><svg width="7" height="7" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>Personal Use</span>
+                <!-- 06 NexusDiary -->
+                <div class="card c-nd rev d1">
+                    <div class="ci">
+                        <div class="ct">
+                            <div class="badges">
+                                <span class="badge b-tag">Flutter</span>
+                                <span class="badge b-private"><svg width="7" height="7" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>Personal Use</span>
+                            </div>
+                            <span class="card-num">06</span>
                         </div>
-                        <span class="card-num">05</span>
-                    </div>
-                    <h3 class="ctitle ctitle-sm">NexusDiary</h3>
-                    <p class="cdesc cdesc-sm">NotionをバックエンドにしたリッチUI日記アプリ。Glassmorphismと美しいアニメーションが特徴。</p>
-                    <div class="stags">
-                        <span class="stag">Notion API</span>
-                        <span class="stag">Gemini AI</span>
+                        <h3 class="ctitle ctitle-sm">NexusDiary</h3>
+                        <p class="cdesc cdesc-sm">NotionをバックエンドにしたリッチUI日記アプリ。Glassmorphismと美しいアニメーションが特徴。</p>
+                        <div class="stags">
+                            <span class="stag">Notion API</span>
+                            <span class="stag">Gemini AI</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 06 DupElim -->
-            <div class="card c-de rev d2">
-                <div class="ci">
-                    <div class="ct">
-                        <div class="badges">
-                            <span class="badge b-tag">Python</span>
-                            <span class="badge b-private"><svg width="7" height="7" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>Personal Use</span>
+                <!-- 07 DupElim -->
+                <div class="card c-de rev d2">
+                    <div class="ci">
+                        <div class="ct">
+                            <div class="badges">
+                                <span class="badge b-tag">Python</span>
+                                <span class="badge b-private"><svg width="7" height="7" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>Personal Use</span>
+                            </div>
+                            <span class="card-num">07</span>
                         </div>
-                        <span class="card-num">06</span>
-                    </div>
-                    <h3 class="ctitle ctitle-sm">DupElim</h3>
-                    <p class="cdesc cdesc-sm">パーセプチュアルハッシュによる高精度な重複画像検出・削除ツール。</p>
-                    <div class="stags">
-                        <span class="stag">Python</span>
-                        <span class="stag">pHash</span>
+                        <h3 class="ctitle ctitle-sm">DupElim</h3>
+                        <p class="cdesc cdesc-sm">パーセプチュアルハッシュによる高精度な重複画像検出・削除ツール。</p>
+                        <div class="stags">
+                            <span class="stag">Python</span>
+                            <span class="stag">pHash</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 07 AutoFillCustomize -->
-            <div class="card c-af rev d3">
-                <div class="ci">
-                    <div class="ct">
-                        <div class="badges">
-                            <span class="badge b-tag">Chrome</span>
-                        </div>
-                        <span class="card-num">07</span>
-                    </div>
-                    <h3 class="ctitle ctitle-sm">AutoFill<br>Customize</h3>
-                    <p class="cdesc cdesc-sm">URLパターンに基づいてフォーム入力を自動化するChrome拡張機能。</p>
-                    <div class="stags">
-                        <span class="stag">JavaScript</span>
-                        <span class="stag">MV3</span>
-                    </div>
-                </div>
             </div>
-
         </div>
     </div>
 </section>
